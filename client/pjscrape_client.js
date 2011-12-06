@@ -72,6 +72,31 @@ window._pjs = (function($) {
     }
     
     /**
+     * Convenience function - find all tags on the page matching the given
+     * selector (or jQuery object) and return given attribute for each
+     * @name _pjs.getAttr
+     * @param {String|jQuery} selector      Selector or jQuery object to find elements
+     * @param {String} attribute            Attribute's name
+     * @return {String[]}                   Array of text contents
+     */    
+    function getAttr(selector, attribute) {
+        return $(selector).map(function() {
+            return $(this).attr(attribute);
+        }).toArray();
+    }
+
+    /**
+     * Convenience function - tells if the given selector is present in the
+     * current page
+     * @name _pjs.isPresent
+     * @param {String|jQuery} selector      Selector or jQuery object to find element
+     * @return {Boolean}                    True for present, false otherwise
+     */ 
+    function isPresent(selector) {
+        return $(selector) ? true : false;
+    }
+    
+    /**
      * Get a set of records by looking for repeated patterns in the .content()
      * of the selected element. Patterns can be supplied as either objects or
      * arrays; the record format will match the input format. Pattern pieces
@@ -222,9 +247,11 @@ window._pjs = (function($) {
     
     return {
         isLocalUrl: isLocalUrl,
+        isPresent: isPresent,
         toFullUrl: toFullUrl,
         getAnchorUrls: getAnchorUrls,
         getText: getText,
+        getAttr: getAttr,
         getPattern: getPattern,
         waitFor: waitFor,
         waitForElement: waitForElement,
